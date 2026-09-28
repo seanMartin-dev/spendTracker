@@ -1,0 +1,14 @@
+public enum Category {
+    GROCERIES,
+    FUEL,
+    INTERNET,
+    ENERGY,
+    TAXI,
+    HOLIDAY,
+    GARDENERS,
+    SUBSCRIPTIONS,
+    POCKET_MONEY,
+    TAKEAWAY,
+    CAR_INSURANCE,
+    PRIVATE_HEALHTCARE
+}
