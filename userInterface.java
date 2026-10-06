@@ -2,27 +2,70 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class userInterface {
-    public static void main(String[] args) {
-        
-        Scanner obj = new Scanner(System.in);
-        Category[] cats = Category.values();
 
-        // set selected to null
+public class UserInterface {
+
+    private Scanner obj;
+    private SpendingHistory history;
+
+    public UserInterface() {
+        obj = new Scanner(System.in);
+        history = new SpendingHistory();
+    }
+
+    public void start() {
+        while (true) {
+            System.out.println("1. Add transaction");
+            System.out.println("2. View all");
+            System.out.println("3. Filter by category");
+            System.out.println("4 View total");
+            System.out.println("5 Exit");
+
+            int choice = obj.nextInt();
+            obj.nextLine();
+
+            switch (choice) {
+                case 1 -> addTransaction();
+                case 2 -> viewAll();
+                case 3 -> filter();
+                case 4 -> total();
+                case 5 -> { return; }
+                default -> System.out.println("Invalid choice");
+            }
+        }
+    }
+
+    private void addTransaction() {
+        // category, amount, data, time logic goes here
+        Category category = getCategory();
+        Float amount = getAmount();
+        LocalDate date = askForDate();
+        String time = askForTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String timestamp = date.format(formatter) + " " + time;
+        
+        // then create Transaction and add to history
+        Transaction t = new Transaction(amount, category, timestamp);
+        System.out.println("Transaction added!");
+    }
+
+    // method for ui internal use
+    private Category getCategory(){
+        Category[] cats = Category.values();
         Category selected = null;
 
-        // while loop to validate user choice
         while (true) {
             int i = 1;
             for (Category c : Category.values()) {
-                System.err.println("Press " + i++ +" for " + c);
+                System.out.println("Press " + i++ +" for " + c);
             }
-        
-            System.out.println("Please chose a number for a category: ");
+
+            System.out.println("Please chose a number to select a category: ");
             int userChoice = obj.nextInt();
-            
+
             if (userChoice >= 1 && userChoice <= cats.length) {
-                selected = cats[userChoice - 1];
+                selected = cats[userChoice -1];
                 System.out.println("User selected: " + selected + ". Correct? (y/n)");
 
                 String confirm = obj.next();
@@ -33,12 +76,15 @@ public class userInterface {
                 System.out.println("Okay, let's try again.\n");
             } else {
                 System.out.println("Invalid choice");
-            }        
+            }
         }
-
+        
+        return selected;
+    }
+    
+    private Float getAmount() {
         Float amount = null;
 
-        // while loop to validate transaction amount
         while (true) {
             
             System.out.println("Amount of transaction:");
@@ -54,53 +100,52 @@ public class userInterface {
         
         System.out.println("Okay, let's try again.");
         }
-       
-        String time;
-         
-        obj.nextLine();
-        LocalDate date = null;
+
+        return amount;
+    }
+    
+    private LocalDate askForDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         while (true) {
             System.out.println("Enter date (dd-MM-yyyy):");
-            String input = obj.nextLine().trim();   // user enters raw text
+            String input = obj.nextLine().trim();
 
             try {
                 LocalDate temp = LocalDate.parse(input, formatter);
-
                 System.out.println("You entered: " + temp.format(formatter) + ". Correct? (y/n)");
-                String confirm = obj.nextLine().trim();
-
-                if (confirm.equalsIgnoreCase("y")) {
-                date = temp;  // save validated date
-                break;
-            }
-
-            System.out.println("Okay, try again.\n");
-
+                if (obj.nextLine().trim().equalsIgnoreCase("y")) return temp;
             } catch (Exception e) {
                 System.out.println("Invalid date format. Please use dd-MM-yyyy.\n");
             }
-           
         }
+    }
 
-        // while loop to validate time of transaction
+    private String askForTime() {
         while (true) {
             System.out.println("Enter time (HH:mm) or press Enter if unknown:");
-            time = obj.nextLine().trim();
+            String time = obj.nextLine().trim();
 
-            if (time.trim().isEmpty()) {
-                time = "00:00";
-                break;
-            }
+            if (time.isEmpty()) return "00:00";
 
-        System.out.println("You entered: " + time + ". Correct? (y/n)");
-        if (obj.nextLine().trim().equalsIgnoreCase("y")) break;
+            System.out.println("You entered: " + time + ". Correct? (y/n)");
+            if (obj.nextLine().trim().equalsIgnoreCase("y")) return time;
 
-        System.out.println("Okay, try again.");
+            System.out.println("Okay, try again.");
         }
+    }
+    
 
-        String timestamp = date.format(formatter) + " " + time;
-        System.out.println("Transaction: " + selected + "\nDate: " + timestamp);
+
+    private void viewAll() {
+        history.printAll();
+    }
+
+    private void filter() {
+        // call history.filterByCategory()
+    }
+
+    private void total() {
+        // call history.getTotal()
     }
 }
