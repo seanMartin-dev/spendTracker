@@ -3,6 +3,8 @@ package spendingtracker;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.List;
+
 
 
 public class UserInterface {
@@ -40,7 +42,7 @@ public class UserInterface {
     private void addTransaction() {
         // category, amount, data, time logic goes here
         Category category = getCategory();
-        Float amount = getAmount();
+        Double amount = getAmount();
         LocalDate date = askForDate();
         String time = askForTime();
 
@@ -89,13 +91,13 @@ public class UserInterface {
     }
     
     // Prompts user for amount and validates confirmation
-    private Float getAmount() {
-        Float amount = null;
+    private Double getAmount() {
+        Double amount = null;
 
         while (true) {
             
             System.out.println("Amount of transaction:");
-            Float temp = obj.nextFloat();
+            Double temp = obj.nextDouble();
 
             System.out.println("You entered: £" + temp + "\nCorrect? (y/n)");
             String confirm = obj.next();
@@ -152,6 +154,17 @@ public class UserInterface {
 
     private void filter() {
         // call history.filterByCategory()
+        Category category = getCategory();
+        List<Transaction> results = history.filterByCategory(category);
+
+        if (results.isEmpty()) {
+            System.out.println("No transactions found for: " + category);
+        } else {
+            System.out.println("Transactions for: " + category);
+            for (Transaction t : results) {
+                System.out.println(t);
+            }
+        }
     }
 
     private void total() {

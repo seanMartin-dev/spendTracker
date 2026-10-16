@@ -1,0 +1,6 @@
+spendingtracker\UserInterface.class
+spendingtracker\Main.class
+spendingtracker\SpendingHistory.class
+spendingtracker\Transaction.class
+spendingtracker\PrototypeUI.class
+spendingtracker\Category.class

@@ -1,6 +1,7 @@
 package spendingtracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpendingHistory {
 
@@ -23,5 +24,15 @@ public class SpendingHistory {
         for (Transaction t : transactions) {
             System.out.println(t);
         }
+    }
+
+    public List<Transaction> filterByCategory(Category category) {
+        List<Transaction> result = new ArrayList<>();
+        for (Transaction t : transactions) {
+            if (t.getCategory() == category) {
+                result.add(t);
+            }
+        }
+        return result;
     }
 }
