@@ -22,11 +22,11 @@ public class UserInterface {
             System.out.println("1. Add transaction");
             System.out.println("2. View all");
             System.out.println("3. Filter by category");
-            System.out.println("4 View total");
-            System.out.println("5 Exit");
+            System.out.println("4. View total");
+            System.out.println("5. Exit");
 
-            int choice = obj.nextInt();
-            obj.nextLine();
+            String raw = obj.nextLine().trim();
+            int choice = Integer.parseInt(raw);
 
             switch (choice) {
                 case 1 -> addTransaction();
@@ -168,6 +168,7 @@ public class UserInterface {
     }
 
     private void total() {
-        // call history.getTotal()
+       double total = history.getTotalSpend();
+       System.out.println("Total spend: £" + total);
     }
 }

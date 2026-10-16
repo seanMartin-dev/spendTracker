@@ -35,4 +35,13 @@ public class SpendingHistory {
         }
         return result;
     }
+
+   public double getTotalSpend() {
+        double total = 0;
+        for (Transaction t: transactions) {
+            total += t.getAmount();
+        }
+        
+        return total;
+   }
 }

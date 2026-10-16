@@ -42,4 +42,17 @@ public class SpendingHistoryTest {
 
         assertEquals(0, fuel.size());
     }
+
+    @Test
+    public void testTotalSpend() {
+        SpendingHistory history = new SpendingHistory();
+
+        history.addTransaction(new Transaction(10.00, Category.FUEL, "01-01-2026 10:00"));
+        history.addTransaction(new Transaction(5.50, Category.GROCERIES, "01-01-2026 11:00"));
+        history.addTransaction(new Transaction(4.25, Category.INTERNET, "01-01-2026"));
+
+        double total = history.getTotalSpend();
+
+        assertEquals(19.75, total, 0.001);
+    }
 }
