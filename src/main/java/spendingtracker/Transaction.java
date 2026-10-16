@@ -1,3 +1,5 @@
+package spendingtracker;
+
 public class Transaction {
 
     private double amount;

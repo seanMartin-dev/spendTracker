@@ -1,3 +1,5 @@
+package spendingtracker;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -47,10 +49,14 @@ public class UserInterface {
         
         // then create Transaction and add to history
         Transaction t = new Transaction(amount, category, timestamp);
+        
+        history.addTransaction(t);
         System.out.println("Transaction added!");
     }
 
     // method for ui internal use
+
+    // Handles category selection with confirmation
     private Category getCategory(){
         Category[] cats = Category.values();
         Category selected = null;
@@ -82,6 +88,7 @@ public class UserInterface {
         return selected;
     }
     
+    // Prompts user for amount and validates confirmation
     private Float getAmount() {
         Float amount = null;
 
@@ -104,6 +111,7 @@ public class UserInterface {
         return amount;
     }
     
+    // Asks user for a date in dd-MM-yyy format with validation
     private LocalDate askForDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -121,6 +129,7 @@ public class UserInterface {
         }
     }
 
+    // Asks user for time or defaults to 00:00 if empty
     private String askForTime() {
         while (true) {
             System.out.println("Enter time (HH:mm) or press Enter if unknown:");

@@ -1,3 +1,5 @@
+package spendingtracker;
+
 import java.util.ArrayList;
 
 public class SpendingHistory {

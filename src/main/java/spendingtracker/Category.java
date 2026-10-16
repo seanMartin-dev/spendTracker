@@ -1,3 +1,5 @@
+package spendingtracker;
+
 public enum Category {
     GROCERIES,
     FUEL,
