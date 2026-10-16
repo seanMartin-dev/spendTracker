@@ -1,3 +1,5 @@
+package spendingtracker;
+
 import java.util.ArrayList;
 
 public class SpendingHistory {
@@ -13,6 +15,11 @@ public class SpendingHistory {
     }
 
     public void printAll() {
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions yet.");
+            return;
+        }
+        
         for (Transaction t : transactions) {
             System.out.println(t);
         }
