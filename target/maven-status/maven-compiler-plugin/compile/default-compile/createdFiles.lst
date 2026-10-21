@@ -3,5 +3,7 @@ spendingtracker\SpendingHistory.class
 spendingtracker\Display.class
 spendingtracker\UserInterface.class
 spendingtracker\Main.class
+spendingtracker\JsonStorage$1.class
 spendingtracker\Transaction.class
 spendingtracker\Category.class
+spendingtracker\JsonStorage.class

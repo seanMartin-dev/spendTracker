@@ -6,5 +6,5 @@
 - View total spend
 - Exit cleanly
 - Sorting (optional)
-- Savae/load to file (optional)
+- Save/load to file (optional)
 - Monthly totals (optional)
