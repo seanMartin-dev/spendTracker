@@ -9,25 +9,33 @@ import java.util.List;
  */
 public class SpendingHistory {
 
-    /**
-     * Internal list holding all transactions.
-     * Kept private to protect data integrity.
-     */
-    private final List<Transaction> transactions = new ArrayList<>();
+    private final JsonStorage storage;
+    private final List<Transaction> transactions;
 
     /**
-     * Adds a new transaction to the history.
+     * Creates a SpendingHistory that loads existing data at startup.
+     *
+     * @param storage the JSON storage handler
+     */
+    public SpendingHistory(JsonStorage storage) {
+        this.storage = storage;
+
+        // Load existing data (missing/corrupted file → empty list)
+        this.transactions = new ArrayList<>(storage.load());
+    }
+
+    /**
+     * Adds a new transaction and immediately persists the updated list.
      *
      * @param t the transaction to store
      */
     public void addTransaction(Transaction t) {
         transactions.add(t);
+        storage.save(transactions);   // Auto‑save after every change
     }
 
     /**
-     * Returns a copy of all stored transactions.
-     * A defensive copy is used to prevent external modification
-     * of the internal list.
+     * Returns a defensive copy of all stored transactions.
      *
      * @return a list containing all transactions
      */
@@ -51,11 +59,6 @@ public class SpendingHistory {
         return result;
     }
 
-    /**
-     * Calculates the total amount spent across all transactions.
-     *
-     * @return the sum of all transaction amounts
-     */
     public double getTotalSpend() {
         double total = 0;
         for (Transaction t : transactions) {

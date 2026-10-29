@@ -23,9 +23,9 @@ public class JsonStorage {
     public List<Transaction> load() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<List<Transaction>>(){}.getType();
-            return gson.fromJson(reader, listType);
+            List<Transaction> list = gson.fromJson(reader, listType);
+            return list != null ? list : List.of();
         } catch (Exception e) {
-            System.out.println("No existing file or error loading. Starting fresh.");
             return List.of();
         }
     }

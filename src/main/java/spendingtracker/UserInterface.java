@@ -7,7 +7,8 @@ public class UserInterface {
 
     private final InputHandler input = new InputHandler();
     private final Display display = new Display();
-    private final SpendingHistory history = new SpendingHistory();
+    private final JsonStorage storage = new JsonStorage();
+    private final SpendingHistory history = new SpendingHistory(storage);
 
     public void start() {
         while (true) {
