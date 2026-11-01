@@ -8,3 +8,4 @@
 - Sorting (optional)
 - Save/load to file (optional)
 - Monthly totals (optional)
+- Monthly Totals per category

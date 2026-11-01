@@ -1,2 +1,4 @@
 spendingtracker\TestJsonStorage.class
+spendingtracker\TestSorting.class
+spendingtracker\TestStorage.class
 spendingtracker\TestSpendingHistory.class
