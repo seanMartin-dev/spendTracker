@@ -1,5 +1,7 @@
 package spendingtracker;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
@@ -72,5 +74,14 @@ public class SpendingHistory {
         .sorted(Comparator.comparing(Transaction::getAmount))
         .toList();
     }
+
+    public List<Transaction> sortByDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+
+        return transactions.stream()
+                .sorted(Comparator.comparing(t ->
+                    LocalDateTime.parse(t.getTimestamp(), formatter)))
+                .toList();
+    }   
     
 }

@@ -20,7 +20,17 @@ public class UserInterface {
                 case 2 -> display.showTransactions(history.getAll());
                 case 3 -> filter();
                 case 4 -> display.showTotal(history.getTotalSpend());
-                case 5 -> { return; }
+                case 5 -> {
+                    display.sortByMenu();
+                    int sortChoice = input.readMenuChoice();
+
+                    switch (sortChoice) {
+                        case 1 -> display.showTransactions(history.sortByAmount());
+                        case 2 -> display.showTransactions(history.sortByDate());
+                        default -> System.out.println("Invailed sort option.");
+                    }
+                }
+                case 6 -> { return; }
                 default -> System.out.println("Invalid choice.");
             }
         }

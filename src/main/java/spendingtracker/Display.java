@@ -10,10 +10,19 @@ public class Display {
     
     public void showMenu() {
         System.out.println("1. Add transaction");
-        System.out.println("2. View all");
+        System.out.println("2. View all tranasactions");
         System.out.println("3. Filter by category");
-        System.out.println("4. View total");
-        System.out.println("5. Exit");
+        System.out.println("4. View total spend");
+        System.out.println("5. Sort transactions (choose type)");
+        System.out.println("6. Exit");
+    }
+
+    /**
+     * Display sortby menu
+     */
+    public void sortByMenu() {
+        System.out.println("1. Sort transaction by amount");
+        System.out.println("2. Sort transaction by date"); 
     }
 
     public void showTransactions(List<Transaction> list) {
