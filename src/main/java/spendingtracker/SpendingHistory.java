@@ -1,15 +1,17 @@
 package spendingtracker;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Comparator;
 /**
  * Stores and manages all recorded transactions.
  * Acts as the application's in‑memory "database".
  */
 public class SpendingHistory {
 
-    private final JsonStorage storage;
+    private final Storage storage;
     private final List<Transaction> transactions;
 
     /**
@@ -17,7 +19,7 @@ public class SpendingHistory {
      *
      * @param storage the JSON storage handler
      */
-    public SpendingHistory(JsonStorage storage) {
+    public SpendingHistory(Storage storage) {
         this.storage = storage;
 
         // Load existing data (missing/corrupted file → empty list)
@@ -66,4 +68,20 @@ public class SpendingHistory {
         }
         return total;
     }
+
+    public List<Transaction> sortByAmount(){
+        return transactions.stream()
+        .sorted(Comparator.comparing(Transaction::getAmount))
+        .toList();
+    }
+
+    public List<Transaction> sortByDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+
+        return transactions.stream()
+                .sorted(Comparator.comparing(t ->
+                    LocalDateTime.parse(t.getTimestamp(), formatter)))
+                .toList();
+    }   
+    
 }

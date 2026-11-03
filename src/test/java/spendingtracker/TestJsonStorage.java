@@ -7,7 +7,6 @@ import spendingtracker.JsonStorage;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
-import java.beans.Transient;
 import java.io.File;
 import java.io.FileWriter;
 
