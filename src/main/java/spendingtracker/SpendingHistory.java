@@ -69,6 +69,22 @@ public class SpendingHistory {
         return total;
     }
 
+    public double getMonthlyTotal(int month, int year) {
+        double total = 0.0;
+
+        for (Transaction t : transactions) {
+            LocalDateTime dt = t.getDateTime();
+
+            boolean sameMonth = dt.getMonthValue() == month;
+            boolean sameYear = dt.getYear() == year;
+
+            if (sameMonth && sameYear) {
+                total += t.getAmount();
+            }
+        }
+        return total;
+    }
+
     public List<Transaction> sortByAmount(){
         return transactions.stream()
         .sorted(Comparator.comparing(Transaction::getAmount))

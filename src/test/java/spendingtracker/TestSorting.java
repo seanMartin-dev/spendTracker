@@ -16,9 +16,9 @@ public class TestSorting {
     void testSortByAmount() {
         SpendingHistory history = new SpendingHistory(new TestStorage());
 
-        history.addTransaction(new Transaction(20, Category.GROCERIES, "2026-10-29 10:00"));
-        history.addTransaction(new Transaction(5, Category.FUEL, "2026-10-29 11:00"));
-        history.addTransaction(new Transaction(15, Category.ENERGY, "2026-10-29 11:30"));
+        history.addTransaction(new Transaction(20, Category.GROCERIES, "29-10-2026 10:00"));
+        history.addTransaction(new Transaction(5, Category.FUEL, "11-10-2026 10:00"));
+        history.addTransaction(new Transaction(15, Category.ENERGY, "19-10-2026 11:30"));
 
         List<Transaction> sorted = history.sortByAmount();
 
@@ -31,14 +31,14 @@ public class TestSorting {
     void testSortByDate() {
         SpendingHistory history = new SpendingHistory(new TestStorage());
 
-        history.addTransaction(new Transaction(20, Category.GROCERIES, "2026-10-29 10:00"));
-        history.addTransaction(new Transaction(5, Category.FUEL, "2026-10-28 10:00"));
-        history.addTransaction(new Transaction(15, Category.ENERGY, "2026-10-29 09:00"));
+        history.addTransaction(new Transaction(20, Category.GROCERIES, "29-10-2026 10:00"));
+        history.addTransaction(new Transaction(5, Category.FUEL, "28-10-2026 10:00"));
+        history.addTransaction(new Transaction(15, Category.ENERGY, "29-10-2026 09:00"));
 
         List<Transaction> sorted = history.sortByDate();
 
-        assertEquals("2026-10-28 10:00", sorted.get(0).getTimestamp());
-        assertEquals("2026-10-29 09:00", sorted.get(1).getTimestamp());
-        assertEquals("2026-10-29 10:00", sorted.get(2).getTimestamp());
+        assertEquals("28-10-2026 10:00", sorted.get(0).getTimestamp());
+        assertEquals("29-10-2026 09:00", sorted.get(1).getTimestamp());
+        assertEquals("29-10-2026 10:00", sorted.get(2).getTimestamp());
     }
 }
