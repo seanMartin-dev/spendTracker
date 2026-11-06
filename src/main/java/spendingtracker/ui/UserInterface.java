@@ -24,18 +24,8 @@ public class UserInterface {
 
             switch (choice) {
                 case 1 -> addTransaction();
-                case 2 -> display.showTransactions(history.getAll());
-                case 3 -> filter();
-                case 4 -> display.showTotal(history.getTotalSpend());
-                case 5 -> reportsMenu.show();
-                case 6 ->{
-                    int month = input.readIntRange("Enter month:", 1, 12);
-                    
-                    int year = input.readIntRange("Enter year:", 2026, 2027);
-                    double total = history.getMonthlyTotal(month, year);
-                    System.out.println("Total for " + month + "/" + year + ": " + total);
-                }
-                case 7 -> { return; }
+                case 2 -> reportsMenu.show();                
+                case 3 -> { return; }
                 default -> System.out.println("Invalid choice.");
             }
         }

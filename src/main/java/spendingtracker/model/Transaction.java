@@ -16,7 +16,7 @@ public class Transaction {
         this.amount = amount;
         this.category = category;
         this.timestamp = timestamp;
-        this.dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm"));
     }
 
     public double getAmount() {
@@ -38,7 +38,7 @@ public class Transaction {
     public void rebuildDateTime() {
         this.dateTime = LocalDateTime.parse(
             this.timestamp,
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+            DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
         );
     }
 

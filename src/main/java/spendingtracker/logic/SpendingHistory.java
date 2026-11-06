@@ -76,25 +76,22 @@ public class SpendingHistory {
     public double getMonthlyTotalByCategory(int month, int year, Category category) {
         double total = 0.0;
 
-        // filter by year then month
         List<Transaction> sorted = sortByDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
 
         for (Transaction t : sorted) {
-            LocalDateTime dt = t.getDateTime();
-            
+            LocalDateTime dt = LocalDateTime.parse(t.getTimestamp(), formatter);
+
             int tYear = dt.getYear();
             int tMonth = dt.getMonthValue();
 
-            // Year filtering
-            if(tYear < year) continue;
-            if(tYear > year) break;
+            if (tYear < year) continue;
+            if (tYear > year) break;
 
-            // Month filtering
-            if(tMonth < month) continue;
-            if(tMonth > month) break;
+            if (tMonth < month) continue;
+            if (tMonth > month) break;
 
-            // Category filtering
-            if(t.getCategory() == category) {
+            if (t.getCategory() == category) {
                 total += t.getAmount();
             }
         }
@@ -102,11 +99,15 @@ public class SpendingHistory {
         return total;
     }
 
+
     public double getMonthlyTotal(int month, int year) {
         double total = 0.0;
 
         for (Transaction t : transactions) {
-            LocalDateTime dt = t.getDateTime();
+            LocalDateTime dt = LocalDateTime.parse(
+                t.getTimestamp(),
+                DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+            );
 
             boolean sameMonth = dt.getMonthValue() == month;
             boolean sameYear = dt.getYear() == year;

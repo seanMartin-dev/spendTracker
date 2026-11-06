@@ -12,12 +12,8 @@ public class Display {
     public void showMenu() {
         System.out.println("\n=== Spending Tracker ===");
         System.out.println("1. Add transaction");
-        System.out.println("2. View all tranasactions");
-        System.out.println("3. Filter by category");
-        System.out.println("4. View total spend");
-        System.out.println("5. Reports menu");
-        System.out.println("6. View monthly total");
-        System.out.println("7. Exit");
+        System.out.println("2. Reports menu");
+        System.out.println("3. Exit");
     }
 
    

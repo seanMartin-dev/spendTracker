@@ -3,17 +3,18 @@ package spendingtracker.ui;
 import spendingtracker.logic.SpendingHistory;
 import spendingtracker.model.Category;
 import spendingtracker.ui.InputHandler;
-
-import java.util.Scanner;
+import spendingtracker.ui.Display;
 
 public class ReportsMenu {
 
     private final SpendingHistory history;
     private final InputHandler input;
+    private final Display display;
 
     public ReportsMenu(SpendingHistory history, InputHandler input) {
         this.history = history;
         this.input = input;
+        this.display = new Display();
     }
 
     public void show() {
@@ -25,7 +26,10 @@ public class ReportsMenu {
             System.out.println("2. View total spending for a month by category");
             System.out.println("3. View category breakdown for a month");
             System.out.println("4. View all transactions for a month");
-            System.out.println("5. Back to main menu");
+            System.out.println("5. View all tranasactions");
+            System.out.println("6. Filter by category");
+            System.out.println("7. View total spend");
+            System.out.println("8. Back to main menu");
             System.out.print("Choose an option: ");
 
             int choice = input.readMenuChoice();
@@ -35,7 +39,10 @@ public class ReportsMenu {
                 case 2 -> viewMonthlyTotalByCategory();
                 case 3 -> viewCategoryBreakdown();
                 case 4 -> viewTransactionsForMonth();
-                case 5 -> running = false;
+                case 5 -> display.showTransactions(history.getAll());
+                case 6 -> filter();
+                case 7 -> display.showTotal(history.getTotalSpend());
+                case 8 -> running = false;
                 default -> System.out.println("Invalid choice.");
             }
         }
@@ -43,7 +50,7 @@ public class ReportsMenu {
 
     private void viewMonthlyTotal() {
         int month = input.readIntRange("Enter month (1-12)", 1, 12);
-        int year = input.readIntRange("Enter year:", 2026,  2027);
+        int year = input.readIntRange("Enter year:", 2000,  2100);
 
         double total = history.getMonthlyTotal(month, year);
         System.out.printf("Total spending for %d/%d: £%.2f%n", month, year, total);
@@ -55,7 +62,13 @@ public class ReportsMenu {
         Category category = askCategory();
 
         double total = history.getMonthlyTotalByCategory(month, year, category);
-        System.out.printf("%s spending for %d/%d: £%.2%n",
+        
+        if (total == 0) {
+            System.out.printf("No transactions found for %s in %d/%d.%n",
+                    category, month, year);
+            return;
+        }
+        System.out.printf("%s spending for %d/%d: £%.2f%n",
                     category, month, year, total);
     }
 
@@ -82,6 +95,11 @@ public class ReportsMenu {
                     return dt.getYear() == year && dt.getMonthValue() == month;
                 })
                 .forEach(t -> System.out.println(t));
+    }
+
+    private void filter() {
+        Category c = input.readCategory();
+        display.showTransactions(history.filterByCategory(c));
     }
 
     private Category askCategory() {

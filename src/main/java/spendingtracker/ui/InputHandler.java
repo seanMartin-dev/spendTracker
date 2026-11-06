@@ -28,8 +28,15 @@ public class InputHandler {
      * @throws NumberFormatException if the input cannot be parsed as an integer.
      */
     public int readMenuChoice() {
-        String raw = scanner.nextLine().trim();
-        return Integer.parseInt(raw);
+        while (true) {
+            String raw = scanner.nextLine().trim();
+
+            try {
+                return Integer.parseInt(raw);
+            } catch (NumberFormatException e) {
+                System.out.println("[WARNING] Please enter a valid number.");
+            }
+        }
     }
 
     /**
