@@ -4,6 +4,7 @@ spendingtracker\ui\Display.class
 spendingtracker\storage\JsonStorage.class
 spendingtracker\ui\UserInterface.class
 spendingtracker\Main.class
+spendingtracker\ui\ReportsMenu.class
 spendingtracker\storage\JsonStorage$1.class
 spendingtracker\storage\Storage.class
 spendingtracker\logic\SpendingHistory.class

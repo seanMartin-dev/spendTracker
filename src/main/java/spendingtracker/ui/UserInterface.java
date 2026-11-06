@@ -4,6 +4,7 @@ import spendingtracker.model.Category;
 import spendingtracker.model.Transaction;
 import spendingtracker.logic.SpendingHistory;
 import spendingtracker.storage.JsonStorage;
+import spendingtracker.ui.ReportsMenu;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,7 @@ public class UserInterface {
     private final Display display = new Display();
     private final JsonStorage storage = new JsonStorage();
     private final SpendingHistory history = new SpendingHistory(storage);
+    private final ReportsMenu reportsMenu = new ReportsMenu(history, input);
 
     public void start() {
         while (true) {
@@ -25,16 +27,7 @@ public class UserInterface {
                 case 2 -> display.showTransactions(history.getAll());
                 case 3 -> filter();
                 case 4 -> display.showTotal(history.getTotalSpend());
-                case 5 -> {
-                    display.sortByMenu();
-                    int sortChoice = input.readMenuChoice();
-
-                    switch (sortChoice) {
-                        case 1 -> display.showTransactions(history.sortByAmount());
-                        case 2 -> display.showTransactions(history.sortByDate());
-                        default -> System.out.println("Invailed sort option.");
-                    }
-                }
+                case 5 -> reportsMenu.show();
                 case 6 ->{
                     int month = input.readIntRange("Enter month:", 1, 12);
                     

@@ -73,6 +73,35 @@ public class SpendingHistory {
         return total;
     }
 
+    public double getMonthlyTotalByCategory(int month, int year, Category category) {
+        double total = 0.0;
+
+        // filter by year then month
+        List<Transaction> sorted = sortByDate();
+
+        for (Transaction t : sorted) {
+            LocalDateTime dt = t.getDateTime();
+            
+            int tYear = dt.getYear();
+            int tMonth = dt.getMonthValue();
+
+            // Year filtering
+            if(tYear < year) continue;
+            if(tYear > year) break;
+
+            // Month filtering
+            if(tMonth < month) continue;
+            if(tMonth > month) break;
+
+            // Category filtering
+            if(t.getCategory() == category) {
+                total += t.getAmount();
+            }
+        }
+
+        return total;
+    }
+
     public double getMonthlyTotal(int month, int year) {
         double total = 0.0;
 
