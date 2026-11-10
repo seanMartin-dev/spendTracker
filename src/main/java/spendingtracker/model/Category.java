@@ -12,7 +12,7 @@ public enum Category {
     POCKET_MONEY,
     TAKEAWAY,
     CAR_INSURANCE,
-    PRIVATE_HEALHTCARE;
+    PRIVATE_HEALTHCARE;
 
     // Change Constants in enum to string POCKET_MONEY = Pocket money
     @Override

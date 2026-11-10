@@ -44,6 +44,11 @@ public class Transaction {
 
     @Override 
     public String toString() {
-        return timestamp + " | " + category + " | £" + amount;
+        return String.format(
+            "%s | %s | £%.2f",
+            timestamp,
+            category,
+            amount
+        );
     }
 }

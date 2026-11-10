@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Comparator;
 /**
  * Stores and manages all recorded transactions.
- * Acts as the application's in‑memory "database".
+ * Provides reporting, filtering and sorting operations
+ * over recorded transactions".
  */
 public class SpendingHistory {
 
@@ -28,6 +29,9 @@ public class SpendingHistory {
 
         // Load existing data (missing/corrupted file → empty list)
         this.transactions = new ArrayList<>(storage.load());
+        for (Transaction t : transactions) {
+            t.rebuildDateTime();
+        }
     }
 
     /**

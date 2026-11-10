@@ -26,7 +26,7 @@ public class ReportsMenu {
             System.out.println("2. View total spending for a month by category");
             System.out.println("3. View category breakdown for a month");
             System.out.println("4. View all transactions for a month");
-            System.out.println("5. View all tranasactions");
+            System.out.println("5. View all transactions");
             System.out.println("6. Filter by category");
             System.out.println("7. View total spend");
             System.out.println("8. Back to main menu");

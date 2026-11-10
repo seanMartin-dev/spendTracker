@@ -38,6 +38,6 @@ public class Display {
     }
 
     public void showTotal(double total) {
-        System.out.println("Total spend: £" + total);
+        System.out.printf("Total spend: £%.2f%n", total);
     }
 }
