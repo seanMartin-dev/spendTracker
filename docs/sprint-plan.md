@@ -11,3 +11,13 @@
 - Load data at startup
 - Save data at exit
 - Handle missing/corrupted files
+
+# Sprint 3 - Sorting
+- Sort by date
+- SOrt by amount
+
+# Sprint 4 - Monthly Intelligence & Final CLI Polish
+
+## sprint goals 
+Add monthly reporting feeatures, reorganise the CLI to prevent menu bloat, and prepare the codebase for the GUI transition in v2.0
+
